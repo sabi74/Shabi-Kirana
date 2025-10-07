@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Shabi Kirana & Khaja Ghar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFD700;
+            --light-color: #FFF8DC;
+            --dark-color: #654321;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 76px;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-color);
+            overflow: hidden;
+            padding: 10px;
+        }
+        
+        .product-img img {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        .product-card .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .nepali-name {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
+        
+        .search-box {
+            margin-bottom: 30px;
+        }
+        
+        .category-filter {
+            margin-bottom: 20px;
+        }
+        
+        .category-btn {
+            margin: 5px;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .nav-link-footer {
+            transition: color 0.3s;
+        }
+        
+        .nav-link-footer:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-store me-2"></i>Shabi Kirana & Khaja Ghar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="product.html">
+                            <i class="fas fa-shopping-basket me-1"></i> Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            <i class="fas fa-concierge-bell me-1"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i> Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.html">
+                            <i class="fas fa-comments me-1"></i> Testimonials
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Products Section -->
+    <section class="products py-5">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            
+            <!-- Search and Filter -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="search-box">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="category-filter">
+                        <select class="form-select" id="categoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="rice">Rice & Grains</option>
+                            <option value="pulses">Pulses & Lentils</option>
+                            <option value="flour">Flour & Atta</option>
+                            <option value="oil">Oil & Ghee</option>
+                            <option value="spices">Spices & Masala</option>
+                            <option value="tea">Tea & Coffee</option>
+                            <option value="snacks">Snacks & Biscuits</option>
+                            <option value="noodles">Noodles & Pasta</option>
+                            <option value="beverages">Beverages</option>
+                            <option value="dairy">Dairy Products</option>
+                            <option value="personal-care">Personal Care</option>
+                            <option value="cleaning">Cleaning Products</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="row" id="productsGrid">
+                <!-- Rice & Grains -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="rice">
+                    <div class="card product-card">
+                        <span class="badge bg-primary category-badge">Rice & Grains</span>
+                        <div class="product-img">
+                            <img src="images/basmatiRice.jpg" alt="Basmati Rice">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Basmati Rice</h5>
+                            <div class="nepali-name">बासमती चामल</div>
+                            <p class="card-text">Premium long grain basmati rice</p>
+                            <div class="price">Rs. 150/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Basmati Rice">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="rice">
+                    <div class="card product-card">
+                        <span class="badge bg-primary category-badge">Rice & Grains</span>
+                        <div class="product-img">
+                            <img src="images/localRice.jpeg" alt="Normal Rice">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Normal Rice</h5>
+                            <div class="nepali-name">सादा चामल</div>
+                            <p class="card-text">Regular quality rice for daily use</p>
+                            <div class="price">Rs. 100/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Normal Rice">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="rice">
+                    <div class="card product-card">
+                        <span class="badge bg-primary category-badge">Rice & Grains</span>
+                        <div class="product-img">
+                            <img src="images/maize.jpeg" alt="Maize">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Maize</h5>
+                            <div class="nepali-name">मकै</div>
+                            <p class="card-text">Dried maize for various uses</p>
+                            <div class="price">Rs. 70/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Maize">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="rice">
+                    <div class="card product-card">
+                        <span class="badge bg-primary category-badge">Rice & Grains</span>
+                        <div class="product-img">
+                            <img src="images/buckWheat.jpeg" alt="Buckwheat">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Buckwheat</h5>
+                            <div class="nepali-name">फापर</div>
+                            <p class="card-text">Healthy buckwheat grains</p>
+                            <div class="price">Rs. 120/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Buckwheat">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pulses & Lentils -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="pulses">
+                    <div class="card product-card">
+                        <span class="badge bg-success category-badge">Pulses & Lentils</span>
+                        <div class="product-img">
+                            <img src="images/redLentils.jpeg" alt="Red Lentils">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Red Lentils</h5>
+                            <div class="nepali-name">मसुरो दाल</div>
+                            <p class="card-text">High-quality red lentils</p>
+                            <div class="price">Rs. 180/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Red Lentils">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="pulses">
+                    <div class="card product-card">
+                        <span class="badge bg-success category-badge">Pulses & Lentils</span>
+                        <div class="product-img">
+                            <img src="images/blackLentils.jpg" alt="Black Gram">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Black Gram</h5>
+                            <div class="nepali-name">मासको दाल</div>
+                            <p class="card-text">Whole black gram lentils</p>
+                            <div class="price">Rs. 220/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Black Gram">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="pulses">
+                    <div class="card product-card">
+                        <span class="badge bg-success category-badge">Pulses & Lentils</span>
+                        <div class="product-img">
+                            <img src="images/chickPeas.jpeg" alt="Chickpeas">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Chickpeas</h5>
+                            <div class="nepali-name">चना</div>
+                            <p class="card-text">Dried chickpeas for cooking</p>
+                            <div class="price">Rs. 160/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Chickpeas">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="pulses">
+                    <div class="card product-card">
+                        <span class="badge bg-success category-badge">Pulses & Lentils</span>
+                        <div class="product-img">
+                            <img src="images/soyabeans.jpg" alt="Soybeans">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Soybeans</h5>
+                            <div class="nepali-name">भटमास</div>
+                            <p class="card-text">Protein-rich soybeans</p>
+                            <div class="price">Rs. 140/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Soybeans">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Flour & Atta -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="flour">
+                    <div class="card product-card">
+                        <span class="badge bg-warning category-badge">Flour & Atta</span>
+                        <div class="product-img">
+                            <img src="images/wheatFlour.jpg" alt="Wheat Flour">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Wheat Flour</h5>
+                            <div class="nepali-name">गहुँको पिठो</div>
+                            <p class="card-text">Finely ground wheat flour</p>
+                            <div class="price">Rs. 65/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Wheat Flour">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="flour">
+                    <div class="card product-card">
+                        <span class="badge bg-warning category-badge">Flour & Atta</span>
+                        <div class="product-img">
+                            <img src="images/riceFlour.jpeg" alt="Rice Flour">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Rice Flour</h5>
+                            <div class="nepali-name">चामलको पिठो</div>
+                            <p class="card-text">Fine rice flour for various dishes</p>
+                            <div class="price">Rs. 80/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Rice Flour">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="flour">
+                    <div class="card product-card">
+                        <span class="badge bg-warning category-badge">Flour & Atta</span>
+                        <div class="product-img">
+                            <img src="images/cornFlour.webp" alt="Corn Flour">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Corn Flour</h5>
+                            <div class="nepali-name">मकैको पिठो</div>
+                            <p class="card-text">Maize flour for various recipes</p>
+                            <div class="price">Rs. 75/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Corn Flour">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="flour">
+                    <div class="card product-card">
+                        <span class="badge bg-warning category-badge">Flour & Atta</span>
+                        <div class="product-img">
+                            <img src="images/besan.jpeg" alt="Besan">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Besan</h5>
+                            <div class="nepali-name">बेसन</div>
+                            <p class="card-text">Chickpea flour for cooking</p>
+                            <div class="price">Rs. 120/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Besan">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Oil & Ghee -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="oil">
+                    <div class="card product-card">
+                        <span class="badge bg-info category-badge">Oil & Ghee</span>
+                        <div class="product-img">
+                            <img src="images/mustardOil.jpeg" alt="Mustard Oil">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mustard Oil</h5>
+                            <div class="nepali-name">तोरीको तेल</div>
+                            <p class="card-text">Pure mustard oil for cooking</p>
+                            <div class="price">Rs. 220/liter</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Mustard Oil">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="oil">
+                    <div class="card product-card">
+                        <span class="badge bg-info category-badge">Oil & Ghee</span>
+                        <div class="product-img">
+                            <img src="images/sunflowerOil.jpg" alt="Sunflower Oil">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Sunflower Oil</h5>
+                            <div class="nepali-name">सूर्यमुखीको तेल</div>
+                            <p class="card-text">Refined sunflower oil</p>
+                            <div class="price">Rs. 240/liter</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Sunflower Oil">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="oil">
+                    <div class="card product-card">
+                        <span class="badge bg-info category-badge">Oil & Ghee</span>
+                        <div class="product-img">
+                            <img src="images/ghee.jpeg" alt="Ghee">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Ghee</h5>
+                            <div class="nepali-name">घिउ</div>
+                            <p class="card-text">Pure clarified butter</p>
+                            <div class="price">Rs. 1200/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Ghee">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="oil">
+                    <div class="card product-card">
+                        <span class="badge bg-info category-badge">Oil & Ghee</span>
+                        <div class="product-img">
+                            <img src="images/soyabeanOil.png" alt="Soybean Oil">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Soybean Oil</h5>
+                            <div class="nepali-name">सोयाबिन तेल</div>
+                            <p class="card-text">Refined soybean oil</p>
+                            <div class="price">Rs. 200/liter</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Soybean Oil">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Spices & Masala -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="spices">
+                    <div class="card product-card">
+                        <span class="badge bg-danger category-badge">Spices & Masala</span>
+                        <div class="product-img">
+                            <img src="images/turmicPowder.jpg" alt="Turmeric Powder">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Turmeric Powder</h5>
+                            <div class="nepali-name">बेसार</div>
+                            <p class="card-text">Pure turmeric powder</p>
+                            <div class="price">Rs. 300/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Turmeric Powder">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="spices">
+                    <div class="card product-card">
+                        <span class="badge bg-danger category-badge">Spices & Masala</span>
+                        <div class="product-img">
+                            <img src="images/cuminSeeds.jpg" alt="Cumin Seeds">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Cumin Seeds</h5>
+                            <div class="nepali-name">जीरा</div>
+                            <p class="card-text">Aromatic cumin seeds</p>
+                            <div class="price">Rs. 400/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Cumin Seeds">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="spices">
+                    <div class="card product-card">
+                        <span class="badge bg-danger category-badge">Spices & Masala</span>
+                        <div class="product-img">
+                            <img src="images/corianderPowder.jpg" alt="Coriander Powder">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Coriander Powder</h5>
+                            <div class="nepali-name">धनियाँ पाउडर</div>
+                            <p class="card-text">Ground coriander seeds</p>
+                            <div class="price">Rs. 350/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Coriander Powder">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="spices">
+                    <div class="card product-card">
+                        <span class="badge bg-danger category-badge">Spices & Masala</span>
+                        <div class="product-img">
+                            <img src="images/redChili.webp" alt="Red Chili Powder">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Red Chili Powder</h5>
+                            <div class="nepali-name">खोर्सानी पाउडर</div>
+                            <p class="card-text">Spicy red chili powder</p>
+                            <div class="price">Rs. 450/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Red Chili Powder">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tea & Coffee -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="tea">
+                    <div class="card product-card">
+                        <span class="badge bg-secondary category-badge">Tea & Coffee</span>
+                        <div class="product-img">
+                            <img src="images/nepaliTea.webp" alt="Nepali Tea">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Nepali Tea</h5>
+                            <div class="nepali-name">नेपाली चिया</div>
+                            <p class="card-text">Premium Nepali tea leaves</p>
+                            <div class="price">Rs. 400/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Nepali Tea">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="tea">
+                    <div class="card product-card">
+                        <span class="badge bg-secondary category-badge">Tea & Coffee</span>
+                        <div class="product-img">
+                            <img src="images/ctcTea.webp" alt="CTC Tea">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">CTC Tea</h5>
+                            <div class="nepali-name">सीटीसी चिया</div>
+                            <p class="card-text">Crush tear curl tea powder</p>
+                            <div class="price">Rs. 300/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="CTC Tea">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="tea">
+                    <div class="card product-card">
+                        <span class="badge bg-secondary category-badge">Tea & Coffee</span>
+                        <div class="product-img">
+                            <img src="images/instantCoffee.jpeg" alt="Instant Coffee">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Instant Coffee</h5>
+                            <div class="nepali-name">इन्स्टेन्ट कफी</div>
+                            <p class="card-text">Quick dissolving coffee powder</p>
+                            <div class="price">Rs. 500/200g</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Instant Coffee">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="tea">
+                    <div class="card product-card">
+                        <span class="badge bg-secondary category-badge">Tea & Coffee</span>
+                        <div class="product-img">
+                            <img src="images/greenTea.jpeg" alt="Green Tea">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Green Tea</h5>
+                            <div class="nepali-name">हरियो चिया</div>
+                            <p class="card-text">Healthy green tea leaves</p>
+                            <div class="price">Rs. 600/kg</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Green Tea">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Snacks & Biscuits -->
+                <div class="col-md-6 col-lg-3 product-item" data-category="snacks">
+                    <div class="card product-card">
+                        <span class="badge bg-dark category-badge">Snacks & Biscuits</span>
+                        <div class="product-img">
+                            <img src="images/biscuit.jpeg" alt="Biscuits">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Biscuits</h5>
+                            <div class="nepali-name">बिस्कुट</div>
+                            <p class="card-text">Assorted biscuit packets</p>
+                            <div class="price">Rs. 20-100/pack</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Biscuits">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="snacks">
+                    <div class="card product-card">
+                        <span class="badge bg-dark category-badge">Snacks & Biscuits</span>
+                        <div class="product-img">
+                            <img src="images/chips.jpg" alt="Chips">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Chips</h5>
+                            <div class="nepali-name">चिप्स</div>
+                            <p class="card-text">Potato chips and snacks</p>
+                            <div class="price">Rs. 10-50/pack</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Chips">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="snacks">
+                    <div class="card product-card">
+                        <span class="badge bg-dark category-badge">Snacks & Biscuits</span>
+                        <div class="product-img">
+                            <img src="images/kurkure.jpg" alt="Kurkure">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Kurkure</h5>
+                            <div class="nepali-name">कुरकुरे</div>
+                            <p class="card-text">Popular crunchy snack</p>
+                            <div class="price">Rs. 20/pack</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Kurkure">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3 product-item" data-category="snacks">
+                    <div class="card product-card">
+                        <span class="badge bg-dark category-badge">Snacks & Biscuits</span>
+                        <div class="product-img">
+                            <img src="images/instantNoodles.jpg" alt="Noodles">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Instant Noodles</h5>
+                            <div class="nepali-name">इन्स्टेन्ट नूडल्स</div>
+                            <p class="card-text">Quick cooking noodles</p>
+                            <div class="price">Rs. 30/pack</div>
+                            <button class="btn btn-outline-primary mt-2 add-to-cart" data-product="Instant Noodles">
+                                <i class="fas fa-cart-plus me-1"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional products can be added similarly -->
+                
+            </div>
+            
+            <!-- Pagination -->
+            <nav aria-label="Product pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Shabi Kirana and Khaja Ghar</h5>
+                    <p>Your trusted local store for all daily needs, tea, and snacks. We provide quality products at reasonable prices with personalized service.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/977123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://facebook.com/shabikirana" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="mailto:info@shabikirana.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="home.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="product.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Products</a></li>
+                        <li><a href="services.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="gallery.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Gallery</a></li>
+                        <li><a href="testimonials.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Testimonials</a></li>
+                        <li><a href="contact.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>Main Road, Lamsalbesi, Kavre, Nepal</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+977 9808559761</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>sabitrilamsal253@gmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>
+                            <span>Open: 6:00 AM - 8:00 PM (Sunday-Friday)</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-coffee me-2"></i>
+                            <span>Tea Shop: 6:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 Shabi Kirana and Khaja Ghar. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for our valued customers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = this.getAttribute('data-product');
+                    alert(`Added ${product} to your cart!`);
+                    // In a real implementation, you would add the product to a cart object
+                });
+            });
+            
+            // Product filtering
+            const categoryFilter = document.getElementById('categoryFilter');
+            const productItems = document.querySelectorAll('.product-item');
+            
+            categoryFilter.addEventListener('change', function() {
+                const selectedCategory = this.value;
+                
+                productItems.forEach(item => {
+                    if (selectedCategory === 'all' || item.getAttribute('data-category') === selectedCategory) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            
+            searchInput.addEventListener('keyup', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                productItems.forEach(item => {
+                    const productName = item.querySelector('.card-title').textContent.toLowerCase();
+                    const nepaliName = item.querySelector('.nepali-name').textContent.toLowerCase();
+                    
+                    if (productName.includes(searchTerm) || nepaliName.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Add some interactive effects
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

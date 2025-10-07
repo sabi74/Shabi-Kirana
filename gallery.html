@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Shabi Kirana & Khaja Ghar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFD700;
+            --light-color: #FFF8DC;
+            --dark-color: #654321;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 76px;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .gallery-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1604719312566-8912e2217c26?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .gallery-filter {
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            margin: 5px;
+            border-radius: 30px;
+            padding: 8px 20px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        .gallery-item {
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            padding: 15px;
+            background-color: white;
+        }
+        
+        .gallery-caption h5 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .gallery-caption p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .customer-story {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .customer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .modal-body {
+            padding: 0;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .modal-caption {
+            padding: 20px;
+        }
+        
+        .instagram-feed {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .instagram-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .nav-link-footer {
+            transition: color 0.3s;
+        }
+        
+        .nav-link-footer:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 60px 0;
+            }
+            
+            .gallery-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .customer-story {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .customer-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-store me-2"></i>Shabi Kirana & Khaja Ghar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">
+                            <i class="fas fa-shopping-basket me-1"></i> Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            <i class="fas fa-concierge-bell me-1"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gallery.html">
+                            <i class="fas fa-images me-1"></i> Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.html">
+                            <i class="fas fa-comments me-1"></i> Testimonials
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Our Gallery</h1>
+            <p class="lead">A visual journey through our store, products, and the community we serve</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter py-4 bg-light">
+        <div class="container text-center">
+            <div class="btn-group flex-wrap" role="group">
+                <button type="button" class="btn btn-outline-secondary filter-btn active" data-filter="all">All</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="store">Store</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="products">Products</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="tea-shop">Tea Shop</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="customers">Customers</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="events">Events</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="delivery">Delivery</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Gallery -->
+    <section class="main-gallery py-5">
+        <div class="container">
+            <h2 class="section-title">Photo Gallery</h2>
+            
+            <div class="row" id="galleryGrid">
+                <!-- Store Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="store">
+                    <img src="images/storeFront.png" alt="Store Front" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Our Store Front</h5>
+                        <p>The main entrance of Shabi Kirana & Khaja Ghar</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="store">
+                    <img src="images/storeInterior.jpg" alt="Store Interior" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Well-Stocked Shelves</h5>
+                        <p>Inside view of our organized product displays</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="store">
+                    <img src="images/counter.png" alt="Counter Area" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Friendly Counter Service</h5>
+                        <p>Our staff ready to assist customers</p>
+                    </div>
+                </div>
+                
+                <!-- Product Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="products">
+                    <img src="images/premiumRice.jpeg" alt="Rice Collection" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Premium Rice Varieties</h5>
+                        <p>Our collection of high-quality rice</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="products">
+                    <img src="images/masalaVariety.webp" alt="Spices" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Aromatic Spices</h5>
+                        <p>Fresh spices and masalas for authentic flavors</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="products">
+                    <img src="images/biscuitsVariety.webp" alt="Snacks" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Delicious Snacks</h5>
+                        <p>Wide variety of biscuits and snacks</p>
+                    </div>
+                </div>
+                
+                <!-- Tea Shop Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="tea-shop">
+                    <img src="images/tea.jpg" alt="Tea Preparation" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Fresh Tea Preparation</h5>
+                        <p>Brewing our famous tea for customers</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="tea-shop">
+                    <img src="images/chowmein.jpeg" alt="Chowmin Preparation" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Hot Chowmin</h5>
+                        <p>Preparing fresh chowmin to order</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="tea-shop">
+                    <img src="images/teaCounter.jpeg" alt="Tea Counter" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Tea Counter</h5>
+                        <p>Our dedicated tea and snacks serving area</p>
+                    </div>
+                </div>
+                
+                <!-- Customer Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="customers">
+                    <img src="images/ganeshLamsal.jpg" alt="Happy Customer" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Regular Customer</h5>
+                        <p>Mr. Ganesh enjoying his daily tea at our shop</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="customers">
+                    <img src="images/familyShoping.jpg" alt="Family Shopping" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Family Shopping</h5>
+                        <p>A family selecting groceries together</p>
+                    </div>
+                </div>
+                
+                <div class="col-mdseniorCitizen.jpg-6 col-lg-4 gallery-item" data-category="customers">
+                    <img src="images/seniorCitizen.jpg" alt="Senior Citizen" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Senior Citizen Service</h5>
+                        <p>Assisting our elderly customer with shopping</p>
+                    </div>
+                </div>
+                
+                <!-- Event Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="events">
+                    <img src="images/dashainDecoration.jpg" alt="Festival Decoration" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Dashain Festival</h5>
+                        <p>Our store decorated for Dashain celebrations</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="events">
+                    <img src="images/tiharSpecial.jpeg" alt="Tihar Celebration" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Tihar Special</h5>
+                        <p>Special Tihar items and decorations</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="events">
+                    <img src="images/communityGathering.jpg" alt="Community Event" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Community Gathering</h5>
+                        <p>Local community event sponsored by our store</p>
+                    </div>
+                </div>
+                
+                <!-- Delivery Images -->
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="delivery">
+                    <img src="images/oredrPacking.jpeg" alt="Delivery Preparation" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Order Preparation</h5>
+                        <p>Packing groceries for home delivery</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="delivery">
+                    <img src="images/delivery.jpg" alt="Delivery Bike" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Delivery Service</h5>
+                        <p>Our delivery staff ready to serve customers</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 gallery-item" data-category="delivery">
+                    <img src="images/successfullyDelivery.webp" alt="Happy Delivery" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h5>Successful Delivery</h5>
+                        <p>Customer receiving their order at home</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-primary btn-lg" id="loadMore">Load More Photos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Stories Section -->
+    <section class="customer-stories py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Customer Stories</h2>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="customer-story">
+                        <img src="images/badriGautam.jpg" alt="Badri Gautam" class="customer-avatar">
+                        <div>
+                            <h5>Badri Gauram Daily Ritual</h5>
+                            <p>"For the past 15 years, my day starts with a cup of tea from Shabi Kirana. The owners know exactly how I like my tea - not too sweet, not too strong. It's more than just a shop; it's part of my family's daily routine."</p>
+                            <div class="rating">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="customer-story">
+                        <img src="images/sanjuPhuyal.jpg" alt="Sanju Phuyal" class="customer-avatar">
+                        <div>
+                            <h5>Sanju Phuyal's Go-To Spot</h5>
+                            <p>"The delivery service from Shabi Kirana has been a lifesaver. They remember my regular order and often suggest new products I might like. Their chowmin is the best in that Khaja Ghar!"</p>
+                            <div class="rating">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Instagram Feed -->
+    <section class="instagram-feed">
+        <div class="container">
+            <div class="instagram-icon">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <h3>Follow Us on Instagram</h3>
+            <p class="lead">@ShabiKiranaPasal</p>
+            <p>See daily updates, new products, and customer moments</p>
+            <a href="https://www.instagram.com/lamsal_nakul/" class="btn btn-light btn-lg mt-3">
+                <i class="fab fa-instagram me-2"></i>Follow Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Shabi Kirana and Khaja Ghar</h5>
+                    <p>Your trusted local store for all daily needs, tea, and snacks. We provide quality products at reasonable prices with personalized service.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/977123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://facebook.com/shabikirana" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="mailto:info@shabikirana.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="home.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="product.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Products</a></li>
+                        <li><a href="services.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="gallery.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Gallery</a></li>
+                        <li><a href="testimonials.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Testimonials</a></li>
+                        <li><a href="contact.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>Main Road, Lamsalbesi, Kavre, Nepal</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+977 9808559761</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>sabitrilamsal253@gmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>
+                            <span>Open: 6:00 AM - 8:00 PM (Sunday-Friday)</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-coffee me-2"></i>
+                            <span>Tea Shop: 6:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 Shabi Kirana and Khaja Ghar. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for our valued customers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="" alt="" class="modal-img" id="modalImage">
+                    <div class="modal-caption">
+                        <h5 id="modalTitle"></h5>
+                        <p id="modalDescription"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gallery Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const loadMoreButton = document.getElementById('loadMore');
+            let visibleItems = 9; // Initially show 9 items
+            
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Load more functionality
+            loadMoreButton.addEventListener('click', function() {
+                // Show 3 more items
+                visibleItems += 3;
+                
+                // Show items up to the new visibleItems count
+                for (let i = 0; i < galleryItems.length; i++) {
+                    if (i < visibleItems) {
+                        galleryItems[i].style.display = 'block';
+                    }
+                }
+                
+                // Hide button if all items are visible
+                if (visibleItems >= galleryItems.length) {
+                    loadMoreButton.style.display = 'none';
+                }
+            });
+            
+            // Initially hide items beyond the first 9
+            for (let i = 9; i < galleryItems.length; i++) {
+                galleryItems[i].style.display = 'none';
+            }
+            
+            // Modal functionality for image viewing
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const imgSrc = this.querySelector('img').src;
+                    const title = this.querySelector('h5').textContent;
+                    const description = this.querySelector('p').textContent;
+                    
+                    modalImage.src = imgSrc;
+                    modalTitle.textContent = title;
+                    modalDescription.textContent = description;
+                    
+                    imageModal.show();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Shabi Kirana & Khaja Ghar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFD700;
+            --light-color: #FFF8DC;
+            --dark-color: #654321;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 76px;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1604719312566-8912e2217c26?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .section-title.left {
+            text-align: left;
+        }
+        
+        .section-title.left:after {
+            left: 0;
+            transform: none;
+        }
+        
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -13px;
+            background-color: white;
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--secondary-color);
+        }
+        
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--secondary-color) transparent transparent;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .team-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 5px solid var(--light-color);
+        }
+        
+        .values-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+        
+        .values-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .nav-link-footer {
+            transition: color 0.3s;
+        }
+        
+        .nav-link-footer:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .page-header {
+                padding: 60px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid var(--secondary-color);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--secondary-color) transparent transparent;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-store me-2"></i>Shabi Kirana & Khaja Ghar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">
+                            <i class="fas fa-shopping-basket me-1"></i> Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            <i class="fas fa-concierge-bell me-1"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i> Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="testimonials.html">
+                            <i class="fas fa-comments me-1"></i> Testimonials
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">About Shabi Kirana & Khaja Ghar</h1>
+            <p class="lead">Our story of serving the community with quality products and heartfelt service</p>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="our-story py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title left">Our Humble Beginnings</h2>
+                    <p class="lead">Serving the lamsalbesi community since 2010</p>
+                    <p>Shabi Kirana & Khaja Ghar started as a small neighborhood store with a simple mission: to provide fresh, quality groceries and homemade snacks to our local community. What began as a modest kirana store has grown into a beloved local institution, known not just for our products but for the personal connections we've built with our customers.</p>
+                    <p>In 2010, we expanded our services to include a tea shop and khaja ghar (snack corner), responding to our customers' requests for a place to enjoy a quick, delicious meal or a refreshing cup of tea. Today, our tea is famous throughout the area, and our chowmin has become a local favorite.</p>
+                    <p>Despite our growth, we've never lost sight of our roots. We remain a family-run business committed to the values that have guided us from the beginning: quality, authenticity, and community.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="images/storeInterior.jpg" alt="Our store in early days" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2010</h3>
+                        <p>Shabi Kirana opens its doors as a small grocery store serving the lamsalbesi community with basic essentials and household items.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2012</h3>
+                        <p>Expanded product range to include fresh vegetables and fruits based on customer requests. Introduced monthly credit system for trusted customers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2015</h3>
+                        <p>Launched the tea shop and khaja ghar, offering black tea, milk tea, and simple snacks. Quickly became a community gathering spot.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2018</h3>
+                        <p>Introduced homemade snacks and expanded tea varieties. Our chowmin became an instant hit among customers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>2022</h3>
+                        <p>Started home delivery service for orders above Rs. 1000. Expanded store space to accommodate growing product range.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>2025</h3>
+                        <p>Celebrated 15 years of serving the community. Continued to adapt to changing customer needs while maintaining our core values.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="values-section py-5">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="values-card">
+                        <div class="values-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Community First</h4>
+                        <p>We believe in building relationships, not just transactions. Our customers are our neighbors, and their satisfaction is our priority.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="values-card">
+                        <div class="values-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4>Quality Assurance</h4>
+                        <p>From our groceries to our tea and snacks, we never compromise on quality. We source the freshest ingredients and maintain high standards.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="values-card">
+                        <div class="values-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Trust & Reliability</h4>
+                        <p>For over 15 years, we've built a reputation for trustworthiness. Our credit system and consistent service reflect this commitment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Meet Our Family</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="images/nakul.jpg" alt="Nakul Lamsal" class="team-img">
+                        <h4>Nakul Lamsal</h4>
+                        <p class="text-muted">Founder & Owner</p>
+                        <p>With over 15 years of experience, Nakul personally oversees all operations and maintains the store's commitment to quality and community service.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="images/sabitri.jpg" alt="Sabitri Lamsal" class="team-img">
+                        <h4>Sabitri Lamsal</h4>
+                        <p class="text-muted">Tea & Snacks Specialist</p>
+                        <p>Sabitri is the creative force behind our famous tea and snacks. Her secret recipes have made our khaja ghar a local favorite.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-card">
+                        <img src="images/sabina.jpg" alt="Sabina Lamsal" class="team-img">
+                        <h4>Sabina Lamsal</h4>
+                        <p class="text-muted">Store Manager</p>
+                        <p>Sabina ensures smooth day-to-day operations, manages inventory, and coordinates our delivery service with efficiency and care.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Impact Section -->
+    <section class="community-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="about-image">
+                        <img src="images/communityGathering.jpg" alt="Community gathering" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title left">Our Community Impact</h2>
+                    <p>At Shabi Kirana & Khaja Ghar, we believe in giving back to the community that has supported us for nearly two decades. Beyond being a place to shop, we've become a community hub where neighbors connect and relationships flourish.</p>
+                    <p>We support local suppliers and farmers, sourcing fresh produce directly from our farms. During festivals and community events, we actively participate and contribute to making lamsalbesi a vibrant place to live.</p>
+                    <p>Our tea shop has become more than just a place to grab a drink—it's where friendships are formed, news is shared, and the community comes together. We're proud to play this role in our neighborhood.</p>
+                    <a href="contact.html" class="btn btn-primary mt-3">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Shabi Kirana and Khaja Ghar</h5>
+                    <p>Your trusted local store for all daily needs, tea, and snacks. We provide quality products at reasonable prices with personalized service.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/977123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://facebook.com/shabikirana" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="mailto:info@shabikirana.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="home.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="product.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Products</a></li>
+                        <li><a href="services.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="gallery.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Gallery</a></li>
+                        <li><a href="testimonials.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Testimonials</a></li>
+                        <li><a href="contact.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>Main Road, Lamsalbesi, Kavre, Nepal</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+977 9808559761</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>sabitrilamsal253@gmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>
+                            <span>Open: 6:00 AM - 8:00 PM (Sunday-Friday)</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-coffee me-2"></i>
+                            <span>Tea Shop: 6:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 Shabi Kirana and Khaja Ghar. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for our valued customers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

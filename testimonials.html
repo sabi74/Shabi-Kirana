@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials - Shabi Kirana & Khaja Ghar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFD700;
+            --light-color: #FFF8DC;
+            --dark-color: #654321;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 76px;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color)) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .testimonials-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--light-color);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--secondary-color);
+        }
+        
+        .author-info h5 {
+            margin-bottom: 0.2rem;
+            color: var(--primary-color);
+        }
+        
+        .author-info p {
+            margin-bottom: 0;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .category-badge {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .video-testimonial {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stats-section {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            margin-bottom: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .testimonial-filter {
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            margin: 5px;
+            border-radius: 30px;
+            padding: 8px 20px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        .customer-story {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+            border: 4px solid var(--secondary-color);
+        }
+        
+        .story-content {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .story-highlight {
+            background-color: var(--light-color);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+        }
+        
+        .leave-testimonial {
+            background-color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(210, 105, 30, 0.25);
+        }
+        
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin: 0 5px;
+        }
+        
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: var(--accent-color);
+        }
+        
+        .footer {
+            background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .nav-link-footer {
+            transition: color 0.3s;
+        }
+        
+        .nav-link-footer:hover {
+            color: var(--accent-color) !important;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        @media (max-width: 768px) {
+            .testimonials-hero {
+                padding: 60px 0;
+            }
+            
+            .testimonials-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .story-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .story-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .leave-testimonial {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="fas fa-store me-2"></i>Shabi Kirana & Khaja Ghar
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            <i class="fas fa-info-circle me-1"></i> About Us
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">
+                            <i class="fas fa-shopping-basket me-1"></i> Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">
+                            <i class="fas fa-concierge-bell me-1"></i> Services
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images me-1"></i> Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="testimonials.html">
+                            <i class="fas fa-comments me-1"></i> Testimonials
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Testimonials Hero Section -->
+    <section class="testimonials-hero">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Customer Testimonials</h1>
+            <p class="lead">Hear what our valued customers have to say about their experiences with Shabi Kirana & Khaja Ghar</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Years Serving</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Would Recommend</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Filter -->
+    <section class="testimonial-filter py-4 bg-light">
+        <div class="container text-center">
+            <div class="btn-group flex-wrap" role="group">
+                <button type="button" class="btn btn-outline-secondary filter-btn active" data-filter="all">All Testimonials</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="products">Products</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="tea-shop">Tea Shop</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="service">Customer Service</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="delivery">Delivery Service</button>
+                <button type="button" class="btn btn-outline-secondary filter-btn" data-filter="long-term">Long-term Customers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Grid -->
+    <section class="testimonials-grid py-5">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            
+            <div class="row" id="testimonialsGrid">
+                <!-- Product Testimonials -->
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="products">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">The quality of rice and pulses at Shabi Kirana is consistently excellent. I've tried many stores in Mandandeupur, but none match their product quality and fair pricing.</p>
+                            <div class="testimonial-author">
+                                <img src="images/gyanBahadur.png" alt="Gyan Bahadur Lamsal" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Gyan Bahadur Lamsal</h5>
+                                    <p>Customer since 2010</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Products</span>
+                                <span><i class="far fa-calendar me-1"></i>2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="tea-shop">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">Their tea is the best in entire Mandandeupur! I stop by every morning on my way to work. The perfect balance of flavor and aroma that keeps me coming back.</p>
+                            <div class="testimonial-author">
+                                <img src="images/rajaramLamsal.jpg" alt="Rajaram Lamsal" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Rajaram Lamsal</h5>
+                                    <p>Daily Tea Customer</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Tea Shop</span>
+                                <span><i class="far fa-calendar me-1"></i>1 month ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="service">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">The staff remembers my name and my regular order. It feels like shopping with family rather than just a store. Their personalized service is unmatched.</p>
+                            <div class="testimonial-author">
+                                <img src="images/keshabPhuyal.jpg" alt="Keshab Phuyal" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Keshab Phuyal</h5>
+                                    <p>Regular Customer</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Customer Service</span>
+                                <span><i class="far fa-calendar me-1"></i>3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="delivery">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">As a senior citizen with mobility issues, their delivery service has been a blessing. They're always punctual and help put the groceries in my kitchen.</p>
+                            <div class="testimonial-author">
+                                <img src="images/badriGautam.jpg" alt="Badri Gautam" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Badri Gautam</h5>
+                                    <p>Senior Citizen</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Delivery Service</span>
+                                <span><i class="far fa-calendar me-1"></i>2 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="long-term">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">I've been shopping here since they opened 15 years ago. Watched them grow from a small shop to what it is today. Their consistency in quality and service is remarkable.</p>
+                            <div class="testimonial-author">
+                                <img src="images/hariSharanLamsal.jpg" alt="Hari Sharan lamsal" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Hari Sharan Lamsal</h5>
+                                    <p>Customer since 2010</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Long-term Customer</span>
+                                <span><i class="far fa-calendar me-1"></i>1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 testimonial-item" data-category="tea-shop">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-text">Their chowmin is legendary in Mandandeupur! Perfectly cooked with fresh vegetables and just the right amount of spices. My kids insist on having it every weekend.</p>
+                            <div class="testimonial-author">
+                                <img src="images/sudarshanLamsal.jpg" alt="Sudarsan Lamsal" class="author-avatar">
+                                <div class="author-info">
+                                    <h5>Sudarsan Lamsal</h5>
+                                    <p>Father of Two</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-meta">
+                                <span class="category-badge">Tea Shop</span>
+                                <span><i class="far fa-calendar me-1"></i>3 weeks ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn btn-primary btn-lg" id="loadMore">Load More Testimonials</button>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Leave Testimonial Section -->
+    <section class="leave-testimonial">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="section-title">Share Your Experience</h2>
+                    <p class="text-center mb-4">We value your feedback! Share your experience with Shabi Kirana & Khaja Ghar</p>
+                    
+                    <form id="testimonialForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <select class="form-select" required>
+                                    <option value="">How long have you been a customer?</option>
+                                    <option value="less-than-1">Less than 1 year</option>
+                                    <option value="1-3">1-3 years</option>
+                                    <option value="3-5">3-5 years</option>
+                                    <option value="5-10">5-10 years</option>
+                                    <option value="10-plus">10+ years</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-select" required>
+                                    <option value="">What do you usually purchase?</option>
+                                    <option value="groceries">Groceries</option>
+                                    <option value="tea">Tea/Snacks</option>
+                                    <option value="both">Both</option>
+                                    <option value="delivery">Delivery Service</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center">
+                            <p>How would you rate your experience?</p>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5">
+                                <label for="star5"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                        
+                        <textarea class="form-control" rows="5" placeholder="Share your experience with us..." required></textarea>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Testimonial</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Shabi Kirana and Khaja Ghar</h5>
+                    <p>Your trusted local store for all daily needs, tea, and snacks. We provide quality products at reasonable prices with personalized service.</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/977123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://facebook.com/shabikirana" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="mailto:info@shabikirana.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="home.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Home</a></li>
+                        <li><a href="about.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>About Us</a></li>
+                        <li><a href="product.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Products</a></li>
+                        <li><a href="services.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Services</a></li>
+                        <li><a href="gallery.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Gallery</a></li>
+                        <li><a href="testimonials.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Testimonials</a></li>
+                        <li><a href="contact.html" class="text-light nav-link-footer"><i class="fas fa-angle-right me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>Main Road, Lamsalbesi, Kavre, Nepal</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+977 9808559761</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>sabitrilamsal253@gmail.com</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-clock me-2"></i>
+                            <span>Open: 6:00 AM - 8:00 PM (Sunday-Friday)</span>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-coffee me-2"></i>
+                            <span>Tea Shop: 6:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-0 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2026 Shabi Kirana and Khaja Ghar. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Designed with <i class="fas fa-heart text-danger"></i> for our valued customers</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Testimonials Filter Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const testimonialItems = document.querySelectorAll('.testimonial-item');
+            const loadMoreButton = document.getElementById('loadMore');
+            const testimonialForm = document.getElementById('testimonialForm');
+            let visibleItems = 6; // Initially show 6 items
+            
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    testimonialItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Load more functionality
+            loadMoreButton.addEventListener('click', function() {
+                // Show 3 more items
+                visibleItems += 3;
+                
+                // Show items up to the new visibleItems count
+                for (let i = 0; i < testimonialItems.length; i++) {
+                    if (i < visibleItems) {
+                        testimonialItems[i].style.display = 'block';
+                    }
+                }
+                
+                // Hide button if all items are visible
+                if (visibleItems >= testimonialItems.length) {
+                    loadMoreButton.style.display = 'none';
+                }
+            });
+            
+            // Initially hide items beyond the first 6
+            for (let i = 6; i < testimonialItems.length; i++) {
+                testimonialItems[i].style.display = 'none';
+            }
+            
+            // Form submission
+            testimonialForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for sharing your experience! Your testimonial will be reviewed before publishing.');
+                this.reset();
+                
+                // Reset star rating
+                const starInputs = this.querySelectorAll('input[type="radio"]');
+                starInputs.forEach(input => {
+                    input.checked = false;
+                });
+            });
+            
+            // Star rating interaction
+            const starLabels = document.querySelectorAll('.star-rating label');
+            starLabels.forEach(label => {
+                label.addEventListener('mouseover', function() {
+                    const stars = this.parentElement.querySelectorAll('label');
+                    const index = Array.from(stars).indexOf(this);
+                    
+                    stars.forEach((star, i) => {
+                        if (i <= index) {
+                            star.style.color = 'var(--accent-color)';
+                        }
+                    });
+                });
+                
+                label.addEventListener('mouseout', function() {
+                    const stars = this.parentElement.querySelectorAll('label');
+                    const checkedInput = this.parentElement.querySelector('input:checked');
+                    
+                    if (checkedInput) {
+                        const index = Array.from(stars).indexOf(checkedInput.nextElementSibling);
+                        
+                        stars.forEach((star, i) => {
+                            if (i <= index) {
+                                star.style.color = 'var(--accent-color)';
+                            } else {
+                                star.style.color = '#ddd';
+                            }
+                        });
+                    } else {
+                        stars.forEach(star => {
+                            star.style.color = '#ddd';
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
